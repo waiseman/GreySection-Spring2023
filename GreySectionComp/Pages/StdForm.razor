@@ -1,0 +1,52 @@
+﻿@page "/StdForm"
+@using GreySectionComp.Model
+
+<h3>Here is Student Form</h3>
+
+<EditForm Model="@student" OnValidSubmit="@HandleOnSubmit">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+
+    <label>
+        Enter Student Id :
+        <InputNumber @bind-Value="student.Id" />
+    </label>
+    <br>
+     <label>
+        Enter Student Name :
+        <InputText @bind-Value="student.Name" />
+    </label>
+    <br>
+     <label>
+        Enter Student DOB :
+        <InputDate @bind-Value="student.DOB" />
+    </label>
+    <br>
+    <button type="submit" >Submit</button>
+
+
+
+</EditForm>
+
+
+
+<GreySectionComp.Components.StudentComp student="@student" />
+
+
+
+@code {
+
+    Student student = new Student()
+    {
+        DOB=DateTime.Now
+    };
+
+    void HandleOnSubmit()
+    {
+        //Process form data
+        student.Id++;
+    }
+
+
+}
