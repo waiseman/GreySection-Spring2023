@@ -1,0 +1,55 @@
+﻿@page "/lifecycle/{Param?}"
+
+<h3>Component LifeCycle</h3>
+
+<p>@message</p>
+<p>@message2</p>
+
+
+
+@code {
+
+    private string message = "Not set";
+    private string message2 = "Not Set";
+    [Parameter]
+    public string? Param { get; set; }
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        if (parameters.TryGetValue<string>(nameof(Param), out var value))
+        {
+            if (value is null)
+            {
+                message = "The value of 'Param' is null.";
+            }
+            else
+            {
+                message = $"The value of 'Param' is {value}.{DateTimeOffset.UtcNow}";
+            }
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
+
+    protected override void OnInitialized()
+    {
+        message2 = $"Initialized at {DateTimeOffset.UtcNow}";
+    }
+
+    protected override void OnParametersSet()
+    {
+
+        message = $"Value Updated By OnParam";
+        message2 = $"Value Updated By OnParam";
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            message2 = $"Value Updated By On After Render on first Rendereing";
+        }
+        message2 = $"Value Updated By On After Render on Rendereing";
+        StateHasChanged();
+    }
+
+}
