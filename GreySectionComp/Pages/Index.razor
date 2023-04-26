@@ -10,20 +10,31 @@ Welcome to your new app.
 
 <br />
 
-<GreySectionComp.Components.StudentComp student="@student" />
+<GreySectionComp.Components.StudentComp student="@student" OnClickCallback="@ShowParentMessage" />
 
 <input type="test" @bind="student.Name" />
+
+<h1>Message is here </h1>
+
+@message
+
 
 @code {
 
     Student student = new Student()
         {
             Id = 10,
-            Name = "",
+            Name = "ALi",
         RollNumber = "12345"
 
         };
         
         
+    private string? message="Message From Parent";
 
+    private void ShowParentMessage(string msg)
+    {
+        message = msg;
+    }
+     
 }

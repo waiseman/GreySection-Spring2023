@@ -1,10 +1,27 @@
 ﻿@using GreySectionComp.Model
 
-<h3 class="bg-warning" >Student Information is here : @student.Id</h3>
-<input  class="form-control" type="text" value="@student.Name" />
-<input  class="form-control" type="text" value="@student.RollNumber" />
+<h3 class="bg-warning">Student Information is here : @student.Id</h3>
+<input class="form-control" type="text" value="@student.Name" />
+<input class="form-control" type="text" value="@student.RollNumber" />
+
+<p>
+    <button @onclick="showMessage">
+        Trigger a Parent component method
+    </button>
+</p>
+
+
 
 @code {
-    [Parameter]  
-    public  Student student { get; set; }
+    [Parameter]
+    public Student student { get; set; }
+    [Parameter]
+    public EventCallback<string> OnClickCallback { get; set; }
+
+    void showMessage()
+    {
+        OnClickCallback.InvokeAsync("Message From child Component");
+    }
+
+
 }

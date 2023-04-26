@@ -13,4 +13,11 @@
     // Demonstrates how a parent component can supply parameters
     [Parameter]
     public string? Title { get; set; }
+
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
+
+
+
 }
